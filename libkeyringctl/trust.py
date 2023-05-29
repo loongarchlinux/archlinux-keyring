@@ -224,16 +224,13 @@ def trust_color(trust: Trust) -> Color:
     -------
     The color representing the passed trust status
     """
-    color: Color = Color.RED
-    if trust == Trust.revoked:
-        color = Color.RED
-    if trust == Trust.unknown:
-        color = Color.YELLOW
-    if trust == Trust.marginal:
-        color = Color.YELLOW
-    if trust == Trust.full:
-        color = Color.GREEN
-    return color
+    match trust:
+        case Trust.full:
+            return Color.GREEN
+        case Trust.unknown | Trust.marginal:
+            return Color.YELLOW
+        case _:
+            return Color.RED
 
 
 def format_trust_label(trust: Trust) -> str:
