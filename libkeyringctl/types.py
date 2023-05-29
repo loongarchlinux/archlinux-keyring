@@ -11,7 +11,7 @@ PacketKind = NewType("PacketKind", str)
 
 
 class Trust(Enum):
-    unknown = auto
+    unknown = auto()
     revoked = auto()
     marginal = auto()
     full = auto()
