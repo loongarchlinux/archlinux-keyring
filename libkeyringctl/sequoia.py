@@ -319,7 +319,7 @@ def key_generate(uids: List[Uid], outfile: Path) -> str:
     cmd = ["sq", "key", "generate"]
     for uid in uids:
         cmd.extend(["--userid", str(uid)])
-    cmd.extend(["--export", str(outfile)])
+    cmd.extend(["--output", str(outfile)])
     return system(cmd)
 
 
