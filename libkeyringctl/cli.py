@@ -118,7 +118,7 @@ verify_parser.add_argument(
 )
 verify_parser.add_argument("--no-lint-hokey", dest="lint_hokey", action="store_false", help="Do not run hokey lint")
 verify_parser.add_argument(
-    "--no-lint-sq-keyring", dest="lint_sq_keyring", action="store_false", help="Do not run sq-keyring-linter"
+    "--no-lint-sq-keyring", dest="lint_sq_keyring", action="store_false", help="Do not run sq keyring lint"
 )
 verify_parser.set_defaults(lint_hokey=True, lint_sq_keyring=True)
 

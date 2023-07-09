@@ -24,12 +24,11 @@ Build:
 Runtime:
 
 * python
-* sequoia-sq
+* sequoia-sq >= 0.31.0
 
 Optional:
 
 * hopenpgp-tools (verify)
-* sq-keyring-linter (verify)
 * git (ci)
 
 ## Usage

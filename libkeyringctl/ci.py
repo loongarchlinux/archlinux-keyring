@@ -10,7 +10,7 @@ from .verify import verify
 
 
 def ci(working_dir: Path, keyring_root: Path, project_root: Path) -> None:
-    """Verify certificates against modern expectations using sq-keyring-linter and hokey
+    """Verify certificates against modern expectations using `sq keyring lint` and hokey
 
     Currently only newly added certificates will be checked against the expectations as existing
     keys are not all fully compatible with those assumptions.

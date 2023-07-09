@@ -29,7 +29,7 @@ def verify(  # noqa: ignore=C901
     lint_hokey: bool = True,
     lint_sq_keyring: bool = True,
 ) -> None:
-    """Verify certificates against modern expectations using sq-keyring-linter and hokey
+    """Verify certificates against modern expectations using `sq keyring lint` and hokey
 
     Parameters
     ----------
@@ -38,7 +38,7 @@ def verify(  # noqa: ignore=C901
     sources: A list of username, fingerprint or directories from which to read PGP packet information
         (defaults to `keyring_root`)
     lint_hokey: Whether to run hokey lint
-    lint_sq_keyring: Whether to run sq-keyring-linter
+    lint_sq_keyring: Whether to run sq keyring lint
     """
 
     if not sources:
@@ -71,7 +71,7 @@ def verify(  # noqa: ignore=C901
                 keyring_fd = Popen(("sq", "dearmor", f"{str(keyring_path)}"), stdout=PIPE)
                 print(system(["hokey", "lint"], _stdin=keyring_fd.stdout), end="")
             if lint_sq_keyring:
-                print(system(["sq-keyring-linter", f"{str(keyring_path)}"]), end="")
+                print(system(["sq", "keyring", "lint", f"{str(keyring_path)}"]), end="")
 
 
 def verify_integrity(certificate: Path, all_fingerprints: Set[Fingerprint]) -> None:  # noqa: ignore=C901
