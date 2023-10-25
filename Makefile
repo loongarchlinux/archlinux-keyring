@@ -2,6 +2,7 @@ SHELL = /bin/bash
 PREFIX ?= /usr/local
 BUILD_DIR ?= build
 KEYRING_TARGET_DIR ?= $(PREFIX)/share/pacman/keyrings/
+RELEASE ?=
 SCRIPT_TARGET_DIR ?= $(PREFIX)/bin
 SYSTEMD_SYSTEM_UNIT_DIR ?= $(shell pkgconf --variable systemd_system_unit_dir systemd)
 WKD_FQDN ?= archlinux.org
@@ -9,6 +10,7 @@ WKD_BUILD_DIR ?= $(BUILD_DIR)/wkd
 KEYRING_FILE=archlinux.gpg
 KEYRING_REVOKED_FILE=archlinux-revoked
 KEYRING_TRUSTED_FILE=archlinux-trusted
+PROJECT=archlinux-keyring
 WKD_SYNC_SCRIPT=archlinux-keyring-wkd-sync
 WKD_SYNC_SERVICE_IN=archlinux-keyring-wkd-sync.service.in
 WKD_SYNC_SERVICE=archlinux-keyring-wkd-sync.service
@@ -51,6 +53,18 @@ wkd_sync_service: wkd_sync/$(WKD_SYNC_SERVICE_IN)
 clean:
 	rm -rf $(BUILD_DIR) $(WKD_BUILD_DIR)
 
+release: clean build
+	$(if $(RELEASE),,$(error RELEASE was not specified!))
+	@glab auth status -h gitlab.archlinux.org
+	@git tag -s $(RELEASE) -m "release version $(RELEASE)"
+	@git push origin refs/tags/$(RELEASE)
+	@mkdir -p $(BUILD_DIR)/$(PROJECT)-$(RELEASE)/
+	@cp $(BUILD_DIR)/{$(KEYRING_FILE),$(KEYRING_REVOKED_FILE),$(KEYRING_TRUSTED_FILE)} $(BUILD_DIR)/$(PROJECT)-$(RELEASE)/
+	@tar cvfz $(BUILD_DIR)/$(PROJECT)-$(RELEASE).tar.gz -C $(BUILD_DIR)/ $(PROJECT)-$(RELEASE)/
+	@gpg -o $(BUILD_DIR)/$(PROJECT)-$(RELEASE).tar.gz.sig --default-key "$(shell git config --local --get user.signingkey)" -s $(BUILD_DIR)/$(PROJECT)-$(RELEASE).tar.gz
+	# NOTE: we specify GITLAB_HOST, because otherwise glab YOLO uses whatever is specified by the `host` key in its config and silently breaks all links...
+	GITLAB_HOST=gitlab.archlinux.org glab release create $(RELEASE) ./build/$(PROJECT)-$(RELEASE).tar.gz* --name=$(RELEASE) --notes="release version $(RELEASE)"
+
 install: build wkd_sync_service
 	install -vDm 644 build/{$(KEYRING_FILE),$(KEYRING_REVOKED_FILE),$(KEYRING_TRUSTED_FILE)} -t $(DESTDIR)$(KEYRING_TARGET_DIR)
 	install -vDm 755 wkd_sync/$(WKD_SYNC_SCRIPT) -t $(DESTDIR)$(SCRIPT_TARGET_DIR)
@@ -69,4 +83,4 @@ uninstall:
 	rm -v $(DESTDIR)$(SYSTEMD_TIMER_DIR)/$(WKD_SYNC_TIMER)
 	rmdir -pv --ignore-fail-on-non-empty $(DESTDIR)$(SYSTEMD_TIMER_DIR)
 
-.PHONY: all lint fmt check test clean install uninstall wkd wkd_inspect
+.PHONY: all lint fmt check test clean install release uninstall wkd wkd_inspect
