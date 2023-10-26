@@ -1,0 +1,10 @@
+[keyring][2]
+keyring/ @archlinux/teams/main-key-holders
+.gitlab* @archlinux/teams/main-key-holders
+.gitignore @archlinux/teams/main-key-holders
+wkd_sync @archlinux/teams/main-key-holders
+Makefile @archlinux/teams/main-key-holders
+*.md @archlinux/teams/main-key-holders
+
+[Anything else]
+* @archlinux/teams/main-key-holders
