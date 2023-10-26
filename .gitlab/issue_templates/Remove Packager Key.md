@@ -37,7 +37,7 @@ All main key holders should revoke their signature(s) for the given key in a
 merge request to this repository using `keyringctl`.
 
 - [ ] @anthraxx
+- [ ] @artafinde
 - [ ] @bluewind
 - [ ] @demize
-- [ ] @diabonas
 - [ ] @dvzrv

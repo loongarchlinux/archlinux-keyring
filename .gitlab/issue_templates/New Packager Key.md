@@ -69,9 +69,9 @@ the details section.
 
 - [ ] The public key has been signed by all main key holders
   - [ ] @anthraxx
+  - [ ] @artafinde
   - [ ] @bluewind
   - [ ] @demize
-  - [ ] @diabonas
   - [ ] @dvzrv
 
 ### Developers of the archlinux-keyring project
