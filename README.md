@@ -133,14 +133,14 @@ Christian Hesse <eworm@archlinux.org>
 David Runge <dvzrv@archlinux.org>
 991F 6E3F 0765 CF62 9588  8586 139B 09DA 5BF0 D338
 
-Pierre Schmitz <pierre@archlinux.org>
-4AA4 767B BC9C 4B1D 18AE  28B7 7F2D 434B 9741 E8AC
-
 Florian Pritz <bluewind@archlinux.org>
 CFA6 AF15 E5C7 4149 FC1D  8C08 6D16 55C1 4CE1 C13E
 
-Giancarlo Razzolini <grazzolini@archlinux.org>
-ECCA C84C 1BA0 8A6C C8E6  3FBB F22F B1D7 8A77 AEAB
+Johannes Löthberg <demize@archlinux.org>
+5134 EF9E AF65 F95B 6BB1  608E 50FB 9B27 3A9D 0BB5
+
+Leonidas Spyropoulos <artafinde@archlinux.org>
+B4B7 5962 5D46 3343 0B74  8770 59E4 3E10 6B24 7368
 
 Levente Polyak <anthraxx@archlinux.org>
 E240 B57E 2C46 30BA 768E  2F26 FC1B 547C 8D81 72C8
