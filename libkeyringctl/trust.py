@@ -202,15 +202,15 @@ def trust_icon(trust: Trust) -> str:
     -------
     The single character icon representing the passed trust status
     """
-    if trust == Trust.revoked:
-        return "✗"
-    if trust == Trust.unknown:
-        return "~"
-    if trust == Trust.marginal:
-        return "~"
-    if trust == Trust.full:
-        return "✓"
-    return "?"
+    icon = "?"
+    match trust:
+        case Trust.revoked:
+            icon = "✗"
+        case Trust.unknown | Trust.marginal:
+            icon = "~"
+        case Trust.full:
+            icon = "✓"
+    return icon
 
 
 def trust_color(trust: Trust) -> Color:
